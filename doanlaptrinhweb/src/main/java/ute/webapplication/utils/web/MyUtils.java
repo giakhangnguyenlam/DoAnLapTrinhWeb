@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ute.webapplication.model.web.AccountModel;
+import ute.webapplication.model.web.CartModel;
 
 
 public class MyUtils {
@@ -36,6 +37,19 @@ public class MyUtils {
 		AccountModel loginedUser = (AccountModel) session.getAttribute("loginedUser");
 		return loginedUser;
 	}
+	
+	
+	public static void storeCartUser(HttpSession session, CartModel cartUser)
+	{
+		session.setAttribute("cartUser", cartUser);
+	}
+	
+	public static CartModel getCartUser(HttpSession session)
+	{
+		CartModel cartUser = (CartModel)session.getAttribute("cartUser");
+		return cartUser;
+	}
+	
 	
 	public static void storeUserCookie(HttpServletResponse response, AccountModel user)
 	{

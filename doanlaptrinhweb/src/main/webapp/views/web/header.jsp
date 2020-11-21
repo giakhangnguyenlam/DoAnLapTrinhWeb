@@ -54,14 +54,14 @@
 				</div>
 		  <div class=" h_menu4">
 				<ul class="memenu skyblue">
-					  <li class="active grid"><a class="color8" href="${pageContext.request.contextPath}/views/web/home.jsp">Home</a></li>	
-				      <li><a class="color1" href="#">Computer</a>
+					  <li class="active grid"><a class="color8" href="${pageContext.request.contextPath}/trang-chu">Home</a></li>	
+				      <li><a class="color1" href="${pageContext.request.contextPath}/product">Computer</a>
 				      	<div class="mepanel">
 						<div class="row">
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="products.html">Apple</a></li>
+										<li><a href="${pageContext.request.contextPath}/productl">Apple</a></li>
 
 										
 										
@@ -71,27 +71,27 @@
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="products.html">Acer</a></li>										
+										<li><a href="${pageContext.request.contextPath}/product">Acer</a></li>										
 									</ul>	
 								</div>							
 							</div>
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="products.html">ASUS</a></li>
+										<li><a href="${pageContext.request.contextPath}/product">ASUS</a></li>
 									</ul>	
 								</div>												
 							</div>
 						  </div>
 						</div>
 					</li>
-				    <li class="grid"><a class="color2" href="#">Accessories</a>
+				    <li class="grid"><a class="color2" href="${pageContext.request.contextPath}/product">Accessories</a>
 					  	<div class="mepanel">
 						<div class="row">
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="products.html">CPU</a></li>
+										<li><a href="${pageContext.request.contextPath}/product">CPU</a></li>
 										
 									</ul>	
 								</div>							
@@ -99,7 +99,7 @@
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="products.html">RAM</a></li>
+										<li><a href="${pageContext.request.contextPath}/product">RAM</a></li>
 
 									</ul>	
 								</div>							
@@ -107,7 +107,7 @@
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="products.html">Hard Drive</a></li>
+										<li><a href="${pageContext.request.contextPath}/product">Hard Drive</a></li>
 										
 									</ul>	
 								</div>												

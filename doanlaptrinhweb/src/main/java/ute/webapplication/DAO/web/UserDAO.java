@@ -26,9 +26,8 @@ public class UserDAO implements IObjectDAO {
 			String email = rs.getString(7);
 			Date birthDate = rs.getDate(8);
 			String address = rs.getString(9);
-			int numOfPurchase = Integer.parseInt(rs.getString(10));
-			String role = rs.getString(11);
-			AccountModel user = new AccountModel(userName, password, name, gender, phone, email, birthDate, address, numOfPurchase, role);
+			String role = rs.getString(10);
+			AccountModel user = new AccountModel(userName, password, name, gender, phone, email, birthDate, address, role);
 			return user;
 		}
 		return null;
@@ -51,9 +50,8 @@ public class UserDAO implements IObjectDAO {
 			String email = rs.getString(7);
 			Date birthDate = rs.getDate(8);
 			String address = rs.getString(9);
-			int numOfPurchase = Integer.parseInt(rs.getString(10));
-			String role = rs.getString(11);
-			AccountModel user = new AccountModel(userName, password, name, gender, phone, email, birthDate, address, numOfPurchase, role);
+			String role = rs.getString(10);
+			AccountModel user = new AccountModel(userName, password, name, gender, phone, email, birthDate, address, role);
 			return user;
 		}
 		return null;
@@ -61,7 +59,7 @@ public class UserDAO implements IObjectDAO {
 
 	@Override
 	public boolean insert(Connection conn, Object obj) {
-		String sql = "Insert into taikhoan(tentaikhoan, matkhau, tenkhachhang, gioitinh, sodienthoai, email, ngaysinh, diachi, soluotmua, vaitro) values(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "Insert into taikhoan(tentaikhoan, matkhau, tenkhachhang, gioitinh, sodienthoai, email, ngaysinh, diachi, vaitro) values(?,?,?,?,?,?,?,?,?)";
 		AccountModel user = (AccountModel) obj;
 		try {
 			PreparedStatement pstm = conn.prepareStatement(sql);
@@ -74,8 +72,7 @@ public class UserDAO implements IObjectDAO {
 			pstm.setString(6, user.geteMail());
 			pstm.setDate(7, user.getNgaySinh());
 			pstm.setString(8, user.getDiaChi());
-			pstm.setInt(9, user.getSoLuotMua());
-			pstm.setString(10, user.getVaiTro());
+			pstm.setString(9, user.getVaiTro());
 			pstm.executeUpdate();
 			return true;
 		} catch (SQLException e) {

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import ute.webapplication.DAO.web.UserDAO;
 import ute.webapplication.model.web.AccountModel;
+import ute.webapplication.model.web.CartModel;
 import ute.webapplication.utils.web.MyUtils;
 
 /**
@@ -75,6 +76,8 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			MyUtils.storeLoginedUser(session, user);
 			request.setAttribute("user", user);
+			CartModel cart = new CartModel();
+			MyUtils.storeCartUser(session, cart);
 			url = "/views/web/home.jsp";
 		}
 		

@@ -12,7 +12,6 @@ public class AccountModel {
 	String eMail;
 	Date ngaySinh;
 	String diaChi;
-	int soLuotMua;
 	String vaiTro;
 	
 	public AccountModel()
@@ -20,7 +19,7 @@ public class AccountModel {
 		
 	}
 	public AccountModel(String tenTaiKhoan, String matKhau, String tenKhachHang, String gioitinh, String soDienThoai,
-			String eMail, Date ngaySinh, String diaChi, int soLuotMua, String vaiTro) {
+			String eMail, Date ngaySinh, String diaChi, String vaiTro) {
 		super();
 		this.tenTaiKhoan = tenTaiKhoan;
 		this.matKhau = matKhau;
@@ -30,7 +29,6 @@ public class AccountModel {
 		this.eMail = eMail;
 		this.ngaySinh = ngaySinh;
 		this.diaChi = diaChi;
-		this.soLuotMua = soLuotMua;
 		this.vaiTro = vaiTro;
 	}
 	public String getTenTaiKhoan() {
@@ -80,12 +78,6 @@ public class AccountModel {
 	}
 	public void setDiaChi(String diaChi) {
 		this.diaChi = diaChi;
-	}
-	public int getSoLuotMua() {
-		return soLuotMua;
-	}
-	public void setSoLuotMua(int soLuotMua) {
-		this.soLuotMua = soLuotMua;
 	}
 	public String getVaiTro() {
 		return vaiTro;

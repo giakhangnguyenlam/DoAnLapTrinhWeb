@@ -95,7 +95,6 @@ public class RegistrationServlet extends HttpServlet {
 			user.seteMail(email);
 			user.setNgaySinh(birthDate);
 			user.setDiaChi(address);
-			user.setSoLuotMua(0);
 			user.setVaiTro("user");
 			UserDAO userDAO =  new UserDAO();
 			if (userDAO.insert(conn, user)) {

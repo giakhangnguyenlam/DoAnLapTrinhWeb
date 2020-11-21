@@ -30,11 +30,12 @@
 	
 	
 	<% 
-		String error = (String)request.getAttribute("errorString");
+		/*String error = (String)request.getAttribute("errorString");
 		if(error == null)
 		{
 			error="";
 		}
+		*/
 		AccountModel user = (AccountModel)request.getAttribute("user");
 		if(user == null)
 		{
@@ -59,7 +60,7 @@
 		<div class="account-pass">
 		<div class="col-md-8 account-top">
 			<form method="POST" action="${pageContext.request.contextPath}/login">
-			<c:out value="${error}" />
+			<c:out value="${errorString}" />
 			<div> 	
 				<span>UserName</span>
 				<input type="text" name="username" placeholder="example: abcxyz" value=<c:out value="${user.getTenTaiKhoan()}" />> 
