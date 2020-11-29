@@ -1,15 +1,17 @@
 package ute.webapplication.model.web;
 
 public class ProductModel {
-	String maSanPham;
-	String ten;
-	String mota;
-	float giaban;
-	int soLuong;
-	int nhaCungCap;
-	String hinhAnh;
-	int soLuongNhap;
-	int soLuongBan;
+	private String maSanPham;
+	private String ten;
+	private String mota;
+	private float giaban;
+	private int soLuong;
+	private int nhaCungCap;
+	private String hinhAnh;
+	private int soLuongNhap;
+	private int soLuongBan;
+	private String tenNhaCungCap;
+	
 	
 	public ProductModel()
 	{
@@ -86,6 +88,16 @@ public class ProductModel {
 
 	public void setSoLuongBan(int soLuongBan) {
 		this.soLuongBan = soLuongBan;
+	}
+	
+	
+	
+	public String getTenNhaCungCap() {
+		return tenNhaCungCap;
+	}
+
+	public void setTenNhaCungCap(String tenNhaCungCap) {
+		this.tenNhaCungCap = tenNhaCungCap;
 	}
 
 	public ProductModel(String maSanPham, String ten, String mota, float giaban, int soLuong, int nhaCungCap,

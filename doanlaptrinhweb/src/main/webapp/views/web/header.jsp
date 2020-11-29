@@ -34,13 +34,12 @@
 						
 					</ul>
 					<div class="cart box_1">
-						<a href="checkout.html">
+						<a href="${pageContext.request.contextPath}/views/web/checkout.jsp">
 						<h3> <div class="total">
-							<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
+							<span> Cart(${totalItems}) </span></div>
 							<img src="${pageContext.request.contextPath}/images/cart.png" alt=""/></h3>
 						</a>
-						<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
-
+						
 					</div>
 					<div class="clearfix"> </div>
 			</div>
@@ -55,13 +54,13 @@
 		  <div class=" h_menu4">
 				<ul class="memenu skyblue">
 					  <li class="active grid"><a class="color8" href="${pageContext.request.contextPath}/trang-chu">Home</a></li>	
-				      <li><a class="color1" href="${pageContext.request.contextPath}/product">Computer</a>
+				      <li><a class="color1" href="${pageContext.request.contextPath}/product?idProduct=computer">Computer</a>
 				      	<div class="mepanel">
 						<div class="row">
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="${pageContext.request.contextPath}/productl">Apple</a></li>
+										<li><a href="${pageContext.request.contextPath}/product?idProduct=LTApple">Apple</a></li>
 
 										
 										
@@ -71,27 +70,27 @@
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="${pageContext.request.contextPath}/product">Acer</a></li>										
+										<li><a href="${pageContext.request.contextPath}/product?idProduct=LTAcer">Acer</a></li>										
 									</ul>	
 								</div>							
 							</div>
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="${pageContext.request.contextPath}/product">ASUS</a></li>
+										<li><a href="${pageContext.request.contextPath}/product?idProduct=LTAssus">ASUS</a></li>
 									</ul>	
 								</div>												
 							</div>
 						  </div>
 						</div>
 					</li>
-				    <li class="grid"><a class="color2" href="${pageContext.request.contextPath}/product">Accessories</a>
+				    <li class="grid"><a class="color2" href="${pageContext.request.contextPath}/product?idProduct=accessories">Accessories</a>
 					  	<div class="mepanel">
 						<div class="row">
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="${pageContext.request.contextPath}/product">CPU</a></li>
+										<li><a href="${pageContext.request.contextPath}/product?idProduct=cpu">CPU</a></li>
 										
 									</ul>	
 								</div>							
@@ -99,7 +98,7 @@
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="${pageContext.request.contextPath}/product">RAM</a></li>
+										<li><a href="${pageContext.request.contextPath}/product?idProduct=ram">RAM</a></li>
 
 									</ul>	
 								</div>							
@@ -107,7 +106,7 @@
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="${pageContext.request.contextPath}/product">Hard Drive</a></li>
+										<li><a href="${pageContext.request.contextPath}/product?idProduct=harddrive">Hard Drive</a></li>
 										
 									</ul>	
 								</div>												

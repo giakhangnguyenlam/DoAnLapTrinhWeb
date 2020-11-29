@@ -4,15 +4,15 @@ package ute.webapplication.model.web;
 import java.sql.Date;
 
 public class AccountModel {
-	String tenTaiKhoan;
-	String matKhau;
-	String tenKhachHang;
-	String gioitinh;
-	String soDienThoai;
-	String eMail;
-	Date ngaySinh;
-	String diaChi;
-	String vaiTro;
+	private String tenTaiKhoan;
+	private String matKhau;
+	private String tenKhachHang;
+	private String gioitinh;
+	private String soDienThoai;
+	private String eMail;
+	private Date ngaySinh;
+	private String diaChi;
+	private String vaiTro;
 	
 	public AccountModel()
 	{

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ute.webapplication.model.web.AccountModel;
+import ute.webapplication.model.web.CartModel;
 import ute.webapplication.utils.web.MyUtils;
 
 /**
@@ -36,7 +37,10 @@ public class HomeController extends HttpServlet {
 		if (user != null) {
 			request.setAttribute("user", user);
 		}
-		
+		CartModel cart = MyUtils.getCartUser(request.getSession());
+		if (cart != null) {
+			request.setAttribute("cart", cart);
+		}
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/web/home.jsp");
 		rd.forward(request, response);
 	}

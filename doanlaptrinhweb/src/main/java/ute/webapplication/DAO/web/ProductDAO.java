@@ -50,14 +50,57 @@ public class ProductDAO implements IObjectDAO{
 		
 	}
 	
-	public static ProductModel findProduct(Connection conn, String productCode)
+	
+	public List<ProductModel> AllListProduct(Connection conn, String productCode)
+	{
+		String sql = "Select * from sanpham Where masanpham like ?";
+		List<ProductModel> listProduct = new ArrayList<ProductModel>();
+		try {
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, productCode);
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+				String masanpham = rs.getString(1);
+				String ten = rs.getString(2);
+				String mota = rs.getString(3);
+				float giaban = rs.getFloat(4);
+				int soluong = rs.getInt(5);
+				int nhacungcap = rs.getInt(6);
+				String hinhanh = rs.getString(7);
+				int soluongnhap = rs.getInt(8);
+				int soluongban = rs.getInt(9);
+				ProductModel oneProduct = new ProductModel();
+				oneProduct.setMaSanPham(masanpham);
+				oneProduct.setTen(ten);
+				oneProduct.setMota(mota);
+				oneProduct.setGiaban(giaban);
+				oneProduct.setSoLuong(soluong);
+				oneProduct.setNhaCungCap(nhacungcap);
+				oneProduct.setHinhAnh(hinhanh);
+				oneProduct.setSoLuongNhap(soluongnhap);
+				oneProduct.setSoLuongBan(soluongban);
+				listProduct.add(oneProduct);
+			}
+			return listProduct;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	
+	}
+	
+	
+	public ProductModel findProduct(Connection conn, String productCode)
 	{
 		String sql = "Select * from sanpham where masanpham=?";
 		try {
 			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, productCode);
 			ResultSet rs = pstm.executeQuery();
 			if (rs.next()) {
 				ProductModel product = new ProductModel();
+				product.setMaSanPham(productCode);
 				product.setTen(rs.getString(2));
 				product.setMota(rs.getString(3));
 				product.setGiaban(rs.getFloat(4));
@@ -66,6 +109,7 @@ public class ProductDAO implements IObjectDAO{
 				product.setHinhAnh(rs.getString(7));
 				product.setSoLuongNhap(rs.getInt(8));
 				product.setSoLuongBan(rs.getInt(9));
+				product.setTenNhaCungCap(nameOfBrand(conn, product.getNhaCungCap()));
 				return product;
 			}
 		} catch (SQLException e) {
@@ -100,7 +144,20 @@ public class ProductDAO implements IObjectDAO{
 		
 		return false;
 	}
-
+	
+	public String nameOfBrand(Connection conn, int codeBrand) throws SQLException
+	{
+		String sql = "Select * from nhacungcap Where manhacungcap = ?";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setInt(1, codeBrand);
+		ResultSet rs = pstm.executeQuery();
+		if (rs.next()) {
+			String nameOfBrand = rs.getString(2);
+			return nameOfBrand;	
+		}
+		return null;
+	}
+	
 	@Override
 	public boolean update(Connection conn, Object obj, String name) {
 		

@@ -10,22 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ute.webapplication.DAO.web.CartDAO;
 import ute.webapplication.DAO.web.ProductDAO;
 import ute.webapplication.model.web.AccountModel;
+import ute.webapplication.model.web.CartModel;
 import ute.webapplication.model.web.ProductModel;
 import ute.webapplication.utils.web.MyUtils;
 
 /**
- * Servlet implementation class ProductServlet
+ * Servlet implementation class CartServlet
  */
-@WebServlet("/productservlet")
-public class ProductServlet extends HttpServlet {
+@WebServlet("/cart")
+public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductServlet() {
+    public CartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +36,42 @@ public class ProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String url = "";
 		AccountModel user = MyUtils.getLoginedUser(request.getSession());
-		if (user != null) {
-			request.setAttribute("user", user);
+		if (user == null) {
+			url="/views/web/login.jsp";
 		}
-		String idProduct = request.getParameter("idProduct").trim();
-		ProductDAO productDAO =  new ProductDAO();
-		Connection conn = MyUtils.getStoredConnection(request);
-		ProductModel product = productDAO.findProduct(conn, idProduct);
-		request.setAttribute("productInformation", product);
-		String url = "/views/web/single.jsp";
-		
+		else {
+			request.setAttribute("user", user);
+			int quantity = Integer.parseInt(request.getParameter("quantity"));
+			String idProduct = request.getParameter("idProduct");
+			Connection conn = MyUtils.getStoredConnection(request);
+			if (quantity<=0) {
+				request.setAttribute("errorQuantity", "You have to enter least 1");
+				ProductDAO productDAO =  new ProductDAO();
+				ProductModel product = productDAO.findProduct(conn, idProduct);
+				request.setAttribute("productInformation", product);
+				url = "/views/web/single.jsp";
+			}
+			else {
+				CartModel cart = MyUtils.getCartUser(request.getSession());
+				CartDAO cartDAO =  new CartDAO();
+				cartDAO.addCart(conn, cart, idProduct, quantity);
+				int totalItems = cart.getListItems().size();
+				request.setAttribute("totalItems", totalItems);
+				float totalCost=0;
+				for (int i = 0; i < totalItems; i++) {
+					totalCost = totalCost + cart.getListItems().get(i).getGiaban()*cart.getListItems().get(i).getSoluong();
+				}
+				request.setAttribute("cart", cart);
+				request.setAttribute("totalCost", totalCost);
+				url="/views/web/checkout.jsp";
+				
+			}
+		}
+
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
 		rd.forward(request, response);
-		
 		
 	}
 
@@ -55,7 +79,7 @@ public class ProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

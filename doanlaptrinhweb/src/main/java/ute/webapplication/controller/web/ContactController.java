@@ -1,29 +1,23 @@
 package ute.webapplication.controller.web;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ute.webapplication.model.web.AccountModel;
-import ute.webapplication.model.web.CartModel;
-import ute.webapplication.utils.web.MyUtils;
-
 /**
- * Servlet implementation class EditUserController
+ * Servlet implementation class ContactController
  */
-@WebServlet("/editUser")
-public class EditUserController extends HttpServlet {
+@WebServlet("/ContactController")
+public class ContactController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditUserController() {
+    public ContactController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +26,7 @@ public class EditUserController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AccountModel user = MyUtils.getLoginedUser(request.getSession());
-		request.setAttribute("user", user);
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/web/userView.jsp");
-		rd.forward(request, response);
+		
 	}
 
 	/**

@@ -3,6 +3,8 @@ package ute.webapplication.controller.web;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import ute.webapplication.DAO.web.UserDAO;
 import ute.webapplication.model.web.AccountModel;
 import ute.webapplication.model.web.CartModel;
+import ute.webapplication.model.web.ItemsModel;
 import ute.webapplication.utils.web.MyUtils;
 
 /**
@@ -77,6 +80,9 @@ public class LoginServlet extends HttpServlet {
 			MyUtils.storeLoginedUser(session, user);
 			request.setAttribute("user", user);
 			CartModel cart = new CartModel();
+			cart.setUser(user);
+			List<ItemsModel> listItems = new ArrayList<ItemsModel>();
+			cart.setListItems(listItems);
 			MyUtils.storeCartUser(session, cart);
 			url = "/views/web/home.jsp";
 		}

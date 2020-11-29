@@ -34,14 +34,51 @@ public class ProductController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.print("chạy vô servlet");
 		AccountModel user = MyUtils.getLoginedUser(request.getSession());
 		if (user != null) {
 			request.setAttribute("user", user);
 		}
+		String idProduct = request.getParameter("idProduct").trim();
 		ProductDAO productDAO = new ProductDAO();
-		List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request));
-		request.setAttribute("listProduct", listProduct);
+		if (idProduct.equals(null)) {			
+			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request));
+			request.setAttribute("listProduct", listProduct);	
+		}
+		else if (idProduct.equals("computer")) {
+			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LT%");
+			request.setAttribute("listProduct", listProduct);	
+		}
+		else if (idProduct.equals("accessories")) {
+			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "Acc%");
+			request.setAttribute("listProduct", listProduct);
+		}
+		else if (idProduct.equals("LTApple")){
+			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LTApple%");
+			request.setAttribute("listProduct", listProduct);
+		}
+		else if (idProduct.equals("LTAcer")){
+			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LTAcer%");
+			request.setAttribute("listProduct", listProduct);
+		}
+		else if (idProduct.equals("LTAssus")) {
+			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LTAssus%");
+			request.setAttribute("listProduct", listProduct);
+		}
+		else if (idProduct.equals("ram")){
+			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "AccRam%");
+			request.setAttribute("listProduct", listProduct);
+		}
+		else if(idProduct.equals("cpu")){
+			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "AccCPU%");
+			request.setAttribute("listProduct", listProduct);
+		}
+		else if(idProduct.equals("harddrive")){
+			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "AccHD%");
+			request.setAttribute("listProduct", listProduct);
+		}
+		else {
+			System.out.println("comming soon");
+		}
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/web/products.jsp");
 		rd.forward(request, response);	
 
