@@ -98,7 +98,7 @@
 			 </c:forEach>
 		</div>
 		<div class="col-md-3 cart-total">
-			 <a class="continue" href="#">Continue to basket</a>
+			 <a class="continue" href="${pageContext.request.contextPath}/product?idProduct=computer">Continue to basket</a>
 			 <div class="price-details">
 				 <h3>Price Details</h3>
 				 <span>Total</span>

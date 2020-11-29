@@ -27,14 +27,14 @@
 				
 						else {%> 
 							<!--<li ><a href="${pageContext.request.contextPath}/views/web/userView.jsp"  ><c:out value="${user.getTenKhachHang()}"/></a></li>-->
-							<li ><a href="${pageContext.request.contextPath}/editUser"  ><c:out value="${user.getTenKhachHang()}"/></a></li>
+							<li ><a href="${pageContext.request.contextPath}/editUser"  ><c:out value="Hello, ${user.getTenKhachHang()}"/></a></li>
 					<%  }%>
 						
 						<li><a href="${pageContext.request.contextPath}/views/web/register.jsp">Register</a></li>
 						
 					</ul>
 					<div class="cart box_1">
-						<a href="${pageContext.request.contextPath}/views/web/checkout.jsp">
+						<a href="${pageContext.request.contextPath}/cartView">
 						<h3> <div class="total">
 							<span> Cart(${totalItems}) </span></div>
 							<img src="${pageContext.request.contextPath}/images/cart.png" alt=""/></h3>
@@ -114,7 +114,7 @@
 						  </div>
 						</div>
 			    </li>			
-				<li><a class="color6" href="${pageContext.request.contextPath}/views/web/contact.jsp">Contact</a></li>
+				<li><a class="color6" href="${pageContext.request.contextPath}/contact">Contact</a></li>
 			  </ul> 
 			</div>
 				

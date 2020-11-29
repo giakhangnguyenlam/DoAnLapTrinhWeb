@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ute.webapplication.DAO.web.UserDAO;
 import ute.webapplication.model.web.AccountModel;
+import ute.webapplication.model.web.CartModel;
 import ute.webapplication.services.web.UserAccount;
 import ute.webapplication.utils.web.MyUtils;
 
@@ -36,6 +37,12 @@ public class EditUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountModel user = MyUtils.getLoginedUser(request.getSession());
+		CartModel cart = MyUtils.getCartUser(request.getSession());
+		if (cart != null) {
+			request.setAttribute("cart", cart);
+			int totalItems = cart.getListItems().size();
+			request.setAttribute("totalItems", totalItems);
+		}
 		String yourName = request.getParameter("yourname").trim();
 		String phoneNumber = request.getParameter("phonenumber").trim();
 		String email = request.getParameter("email").trim();

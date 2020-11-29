@@ -8,23 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import ute.webapplication.model.web.AccountModel;
 import ute.webapplication.model.web.CartModel;
 import ute.webapplication.utils.web.MyUtils;
 
 /**
- * Servlet implementation class UserInfo
+ * Servlet implementation class CartControler
  */
-@WebServlet("/userInfo")
-public class UserInfoServlet extends HttpServlet {
+@WebServlet("/cartView")
+public class CartControler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserInfoServlet() {
+    public CartControler() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +32,30 @@ public class UserInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		AccountModel loginedUser = MyUtils.getLoginedUser(session);
-		if (loginedUser == null) {
-			response.sendRedirect("${pageContext.request.contextPath}/login");
+		AccountModel user = MyUtils.getLoginedUser(request.getSession());
+		String url = "";
+		if (user == null) {
+			url="/views/web/login.jsp";
 		}
+		else {
+			request.setAttribute("user", user);
+		}
+
 		CartModel cart = MyUtils.getCartUser(request.getSession());
 		if (cart != null) {
 			request.setAttribute("cart", cart);
 			int totalItems = cart.getListItems().size();
 			request.setAttribute("totalItems", totalItems);
+			float totalCost=0;
+			for (int i = 0; i < totalItems; i++) {
+				totalCost = totalCost + cart.getListItems().get(i).getGiaban()*cart.getListItems().get(i).getSoluong();
+			}
+			request.setAttribute("cart", cart);
+			request.setAttribute("totalCost", totalCost);
+			url="/views/web/checkout.jsp";
 		}
-		request.setAttribute("user", loginedUser);
-		RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/views/web/home.jsp");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
 		rd.forward(request, response);
-		
 	}
 
 	/**

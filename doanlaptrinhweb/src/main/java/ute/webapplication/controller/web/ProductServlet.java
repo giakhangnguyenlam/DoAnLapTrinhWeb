@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ute.webapplication.DAO.web.ProductDAO;
 import ute.webapplication.model.web.AccountModel;
+import ute.webapplication.model.web.CartModel;
 import ute.webapplication.model.web.ProductModel;
 import ute.webapplication.utils.web.MyUtils;
 
@@ -37,6 +38,12 @@ public class ProductServlet extends HttpServlet {
 		AccountModel user = MyUtils.getLoginedUser(request.getSession());
 		if (user != null) {
 			request.setAttribute("user", user);
+		}
+		CartModel cart = MyUtils.getCartUser(request.getSession());
+		if (cart != null) {
+			request.setAttribute("cart", cart);
+			int totalItems = cart.getListItems().size();
+			request.setAttribute("totalItems", totalItems);
 		}
 		String idProduct = request.getParameter("idProduct").trim();
 		ProductDAO productDAO =  new ProductDAO();

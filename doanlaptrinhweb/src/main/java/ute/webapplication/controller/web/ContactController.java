@@ -1,16 +1,22 @@
 package ute.webapplication.controller.web;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ute.webapplication.model.web.AccountModel;
+import ute.webapplication.model.web.CartModel;
+import ute.webapplication.utils.web.MyUtils;
+
 /**
  * Servlet implementation class ContactController
  */
-@WebServlet("/ContactController")
+@WebServlet("/contact")
 public class ContactController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +32,18 @@ public class ContactController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		AccountModel user = MyUtils.getLoginedUser(request.getSession());
+		if (user != null) {
+			request.setAttribute("user", user);
+		}
+		CartModel cart = MyUtils.getCartUser(request.getSession());
+		if (cart != null) {
+			request.setAttribute("cart", cart);
+			int totalItems = cart.getListItems().size();
+			request.setAttribute("totalItems", totalItems);
+		}
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/web/contact.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

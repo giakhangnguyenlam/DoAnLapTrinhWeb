@@ -34,6 +34,12 @@ public class EditUserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountModel user = MyUtils.getLoginedUser(request.getSession());
 		request.setAttribute("user", user);
+		CartModel cart = MyUtils.getCartUser(request.getSession());
+		if (cart != null) {
+			request.setAttribute("cart", cart);
+			int totalItems = cart.getListItems().size();
+			request.setAttribute("totalItems", totalItems);
+		}
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/web/userView.jsp");
 		rd.forward(request, response);
 	}

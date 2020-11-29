@@ -56,7 +56,19 @@ public class CartServlet extends HttpServlet {
 			else {
 				CartModel cart = MyUtils.getCartUser(request.getSession());
 				CartDAO cartDAO =  new CartDAO();
-				cartDAO.addCart(conn, cart, idProduct, quantity);
+				String optionAddToCart = request.getParameter("addToCart");
+				String optionDeleteCart = request.getParameter("delete");
+				String optionUpdateCart = request.getParameter("update");
+				if ("Add To cart".equals(optionAddToCart)) {
+					cartDAO.addCart(conn, cart, idProduct, quantity);
+				}
+				if ("Update".equals(optionUpdateCart)) {
+					cartDAO.updateCart(conn, cart, idProduct, quantity);
+				}
+				if ("Delete".equals(optionDeleteCart)) {
+					cartDAO.deleteCart(conn, cart, idProduct);
+				}
+				
 				int totalItems = cart.getListItems().size();
 				request.setAttribute("totalItems", totalItems);
 				float totalCost=0;

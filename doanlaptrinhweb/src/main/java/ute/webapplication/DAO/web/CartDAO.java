@@ -27,12 +27,31 @@ public class CartDAO{
 		return true;
 	}
 	
-	public boolean deleteCart(Connection conn, String codeProduct)
+	public boolean deleteCart(Connection conn, Object obj, String codeProduct)
 	{
-		
-
+		CartModel cart = (CartModel)obj;
+		for (int i = 0; i < cart.getListItems().size(); i++) {
+			if (codeProduct.equals(cart.getListItems().get(i).getMaSanPham())) {
+				cart.getListItems().remove(i);
+				return true;
+			}
+		}
 
 		return false;
+	}
+	
+	public boolean updateCart(Connection conn, Object obj, String codeProduct, int quantity)
+	{
+		CartModel cart = (CartModel)obj;
+		for (int i = 0; i < cart.getListItems().size(); i++) {
+			if (codeProduct.equals(cart.getListItems().get(i).getMaSanPham())) {
+				cart.getListItems().get(i).setSoluong(quantity);
+				cart.getListItems().get(i).setThanhTien(cart.getListItems().get(i).getSoluong()*cart.getListItems().get(i).getGiaban());
+				return true;
+			}
+		}
+		return false;
+		
 	}
 	
 	public ItemsModel findItems(Object obj, String codeProduct)

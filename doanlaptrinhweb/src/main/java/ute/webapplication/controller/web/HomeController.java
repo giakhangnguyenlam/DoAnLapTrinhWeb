@@ -40,6 +40,8 @@ public class HomeController extends HttpServlet {
 		CartModel cart = MyUtils.getCartUser(request.getSession());
 		if (cart != null) {
 			request.setAttribute("cart", cart);
+			int totalItems = cart.getListItems().size();
+			request.setAttribute("totalItems", totalItems);
 		}
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/web/home.jsp");
 		rd.forward(request, response);
