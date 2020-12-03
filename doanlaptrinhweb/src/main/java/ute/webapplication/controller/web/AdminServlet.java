@@ -1,7 +1,7 @@
 package ute.webapplication.controller.web;
 
 import java.io.IOException;
-import java.sql.Connection;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,24 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ute.webapplication.DAO.web.ProductDAO;
+import ute.webapplication.DAO.web.UserDAO;
 import ute.webapplication.model.web.AccountModel;
-import ute.webapplication.model.web.CartModel;
-import ute.webapplication.model.web.DetailLaptopModel;
-import ute.webapplication.model.web.ProductModel;
 import ute.webapplication.utils.web.MyUtils;
 
 /**
- * Servlet implementation class ProductServlet
+ * Servlet implementation class AdminServlet
  */
-@WebServlet("/productservlet")
-public class ProductServlet extends HttpServlet {
+@WebServlet("/AdminServlet")
+public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductServlet() {
+    public AdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,40 +33,41 @@ public class ProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String actionAdmin=request.getParameter("actionAdmin");
+		String action=request.getParameter("action");
+		String url="";
 		AccountModel user = MyUtils.getLoginedUser(request.getSession());
 		if (user != null) {
-			request.setAttribute("user", user);
+			if(actionAdmin.equals("ViewUser"))
+			{
+				ArrayList<AccountModel> listUser=UserDAO.AllListProduct(MyUtils.getStoredConnection(request));
+				if(listUser.size()==1)
+				{
+					System.out.println("co 1 thang thoi");
+				}
+				else
+				{
+					request.setAttribute("listUser", listUser);
+					url="/views/admin/UserView.jsp";
+				}
+				
+			}
+			else if(actionAdmin.equals("ViewProduct"))
+			{
+			}
+			else if(actionAdmin.equals("ViewSupplier"))
+			{
+				
+			}
 		}
-		CartModel cart = MyUtils.getCartUser(request.getSession());
-		if (cart != null) {
-			request.setAttribute("cart", cart);
-			int totalItems = cart.getListItems().size();
-			request.setAttribute("totalItems", totalItems);
-		}
-		String idProduct = request.getParameter("idProduct").trim();
-		ProductDAO productDAO =  new ProductDAO();
-		Connection conn = MyUtils.getStoredConnection(request);
-		ProductModel product = productDAO.findProduct(conn, idProduct);
-		request.setAttribute("productInformation", product);
-		if (idProduct.startsWith("LT")) {
-			DetailLaptopModel detailLaptop = productDAO.detailLaptop(conn, idProduct);
-			request.setAttribute("detailLaptop", detailLaptop);
-		}
-		
-		
-		String url = "/views/web/single.jsp";
-		
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
 		rd.forward(request, response);
-		
-		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

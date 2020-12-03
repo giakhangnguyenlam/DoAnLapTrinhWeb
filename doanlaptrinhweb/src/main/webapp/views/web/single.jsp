@@ -49,9 +49,9 @@
 </script>
 <script
 	src="${pageContext.request.contextPath}/template/web/js/main2.js">
-	
 </script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -117,7 +117,130 @@ $(window).load(function() {
 									</div>
 									<span>${errorQuantity}</span>
 									<br>
-									<a href="#" class="add-cart item_add">Detail</a>
+									<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Detail</button>
+								
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="   [.]close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Item Detail</h4>
+      </div>
+      <div class="modal-body">
+        <table style="width:100%">
+			<tr>
+				<td>Brand</td>
+				<td>${productInformation.tenNhaCungCap}</td>
+			</tr>
+			<tr>
+				<td>Guarantee</td>
+				<td>${detailLaptop.baoHanh}</td>
+			</hbbbtr>
+			<tr>
+				<th>General information</th>
+			</tr>
+			<tr>
+				<td>Color</td>
+				<td>${detailLaptop.mauSac}</td>
+			</tr>
+			<tr>
+				<td>Series laptop</td>
+				<td>${detailLaptop.seriesLaptop}</td>
+			</tr>
+			<tr>
+				<td>Part-Number</td>
+				<td>${detailLaptop.partNumber}</td>
+			</tr>
+			<tr>
+				<th>Detailed configuration</th>
+			</tr>
+			<tr>
+				<td>Cpu generation</td>
+				<td>${detailLaptop.theHeCPU}</td>
+			</tr>
+			<tr>
+				<td>CPU</td>
+				<td>${detailLaptop.cpu} </td>
+			</tr>
+			<tr>
+				<td>Graphics chip</td>
+				<td>${detailLaptop.chipDoHoa}</td>
+			</tr>
+			<tr>
+				<td>RAM</td>
+				<td>${detailLaptop.ram}</td>
+			</tr>
+			<tr>
+				<td>Screen</td>
+				<td>${detailLaptop.manHinh}</td>
+			</tr>
+			<tr>
+				<td>Storage</td>
+				<td>${detailLaptop.luuTru}</td>
+			</tr>
+			<tr>
+				<td>Maximum number of storage ports</td>
+				<td>${detailLaptop.soCongLuuTruToiDa}</td>
+			</tr>
+			<tr>
+				<td>M.2 slot type supported</td>
+				<td>${detailLaptop.kieuKheM2HoTro}</td>
+			</tr>
+			<tr>
+				<td>Connector</td>
+				<td>${detailLaptop.congKetNoi}</td>
+			</tr>
+			<tr>
+				<td>Wireless Connectivity</td>
+				<td>${detailLaptop.ketNoiKhongDay}</td>
+			</tr>
+			<tr>
+				<td>Keyboard</td>
+				<td>${detailLaptop.banPhim}</td>
+			</tr>
+			<tr>
+				<td>Operate system</td>
+				<td>${detailLaptop.heDieuHanh}</td>
+			</tr>
+			<tr>
+				<td>Size</td>
+				<td>${detailLaptop.kichThuoc}</td>
+			</tr>
+			<tr>
+				<td>Battery</td>
+				<td>${detailLaptop.pin}</td>
+			</tr>
+			<tr>
+				<td>Weight</td>
+				<td>${detailLaptop.khoiLuong}</td>
+			</tr>
+			<tr>
+				<th>Other information</th>
+			</tr>
+			<tr>
+				<td>Security</td>
+				<td>${detailLaptop.baoMat}</td>
+			</tr>
+			<tr>
+				<td>LED lights on the machine</td>
+				<td>${detailLaptop.denLedTrenMay}</td>
+			</tr>
+			<tr>
+				<td>Accessories included</td>
+				<td>${detailLaptop.phuKienDiKem}</td>
+			</tr>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 								<div class="clearfix"> </div>
 							</ul>
 							<input type="submit" name="addToCart" value="Add To cart">

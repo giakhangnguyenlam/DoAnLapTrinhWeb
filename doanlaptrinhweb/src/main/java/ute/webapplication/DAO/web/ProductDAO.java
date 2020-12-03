@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import ute.webapplication.model.web.DetailLaptopModel;
 import ute.webapplication.model.web.ProductModel;
 
 public class ProductDAO implements IObjectDAO{
@@ -156,6 +156,48 @@ public class ProductDAO implements IObjectDAO{
 			return nameOfBrand;	
 		}
 		return null;
+	}
+	
+	public DetailLaptopModel detailLaptop(Connection conn, String codeProduct)
+	{
+		String sql = "Select * from thongtinchitietlaptop where masanpham=?";
+		try {
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, codeProduct);
+			ResultSet rs = pstm.executeQuery();
+			if (rs.next()) {
+				DetailLaptopModel detailLaptop = new DetailLaptopModel();
+				detailLaptop.setBaoHanh(rs.getInt(2));
+				detailLaptop.setMauSac(rs.getString(3));
+				detailLaptop.setSeriesLaptop(rs.getString(4));
+				detailLaptop.setPartNumber(rs.getString(5));
+				detailLaptop.setTheHeCPU(rs.getString(6));
+				detailLaptop.setCpu(rs.getString(7));
+				detailLaptop.setChipDoHoa(rs.getString(8));
+				detailLaptop.setRam(rs.getString(9));
+				detailLaptop.setManHinh(rs.getString(10));
+				detailLaptop.setLuuTru(rs.getString(11));
+				detailLaptop.setSoCongLuuTruToiDa(rs.getString(12));
+				detailLaptop.setKieuKheM2HoTro(rs.getString(13));
+				detailLaptop.setCongKetNoi(rs.getString(14));
+				detailLaptop.setKetNoiKhongDay(rs.getString(15));
+				detailLaptop.setBanPhim(rs.getString(16));
+				detailLaptop.setHeDieuHanh(rs.getString(17));
+				detailLaptop.setKichThuoc(rs.getString(18));
+				detailLaptop.setPin(rs.getString(19));
+				detailLaptop.setKhoiLuong(rs.getString(20));
+				detailLaptop.setBaoMat(rs.getString(21));
+				detailLaptop.setDenLedTrenMay(rs.getString(22));
+				detailLaptop.setPhuKienDiKem(rs.getString(23));
+				return detailLaptop;		
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+		
 	}
 	
 	@Override

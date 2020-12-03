@@ -84,7 +84,14 @@ public class LoginServlet extends HttpServlet {
 			List<ItemsModel> listItems = new ArrayList<ItemsModel>();
 			cart.setListItems(listItems);
 			MyUtils.storeCartUser(session, cart);
-			url = "/views/web/home.jsp";
+			if(user.getVaiTro().equals("admin"))
+			{
+				url = "/views/admin/home.jsp";
+			}
+			else 
+			{
+				url = "/views/web/home.jsp";
+			}
 		}
 		
 		RequestDispatcher dp = getServletContext().getRequestDispatcher(url);

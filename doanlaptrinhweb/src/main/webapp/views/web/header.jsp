@@ -22,15 +22,18 @@
 						if(user ==null) {
 					%>
 						<li ><a href="${pageContext.request.contextPath}/views/web/login.jsp" ><c:out value="Login"/></a></li>
+						<li><a href="${pageContext.request.contextPath}/views/web/register.jsp">Register</a></li>
 					<% 
 						}	
 				
 						else {%> 
 							<!--<li ><a href="${pageContext.request.contextPath}/views/web/userView.jsp"  ><c:out value="${user.getTenKhachHang()}"/></a></li>-->
 							<li ><a href="${pageContext.request.contextPath}/editUser"  ><c:out value="Hello, ${user.getTenKhachHang()}"/></a></li>
+							<li><a href="${pageContext.request.contextPath}/logOut">Log out</a></li>
+							
 					<%  }%>
 						
-						<li><a href="${pageContext.request.contextPath}/views/web/register.jsp">Register</a></li>
+						
 						
 					</ul>
 					<div class="cart box_1">
