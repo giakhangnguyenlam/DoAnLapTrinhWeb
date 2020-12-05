@@ -9,12 +9,29 @@ public class CartModel {
 	private AccountModel user;
 	private Date ngayMuaHang;
 	private float tongTien;
+	private String sanpham;
 	private String tinhTrangDonHang;
 	
 	public CartModel()
 	{}
 	
 	
+	public String getSanpham() {
+		return sanpham;
+	}
+
+
+
+
+
+	public void setSanpham(String sanpham) {
+		this.sanpham = sanpham;
+	}
+
+
+
+
+
 	public List<ItemsModel> getListItems() {
 		return listItems;
 	}

@@ -14,16 +14,16 @@ import ute.webapplication.model.web.CartModel;
 import ute.webapplication.utils.web.MyUtils;
 
 /**
- * Servlet implementation class EditUserController
+ * Servlet implementation class OrderConfirmationController
  */
-@WebServlet("/editUser")
-public class EditUserController extends HttpServlet {
+@WebServlet("/orderconfirmation")
+public class OrderConfirmationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditUserController() {
+    public OrderConfirmationController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +33,30 @@ public class EditUserController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountModel user = MyUtils.getLoginedUser(request.getSession());
-		request.setAttribute("user", user);
+		String url = "";
+		if (user == null) {
+			url="/views/web/login.jsp";
+		}
+		else {
+			request.setAttribute("user", user);
+		}
+
 		CartModel cart = MyUtils.getCartUser(request.getSession());
 		if (cart != null) {
 			request.setAttribute("cart", cart);
 			int totalItems = 0;
+			request.setAttribute("totalItems", totalItems);
+			float totalCost=0;
 			for (int i = 0; i < cart.getListItems().size(); i++) {
+				totalCost = totalCost + cart.getListItems().get(i).getGiaban()*cart.getListItems().get(i).getSoluong();
 				totalItems = totalItems + cart.getListItems().get(i).getSoluong();
 			}
 			request.setAttribute("totalItems", totalItems);
+			request.setAttribute("cart", cart);
+			request.setAttribute("totalCost", totalCost);
+			url="/views/web/confirmOrder.jsp";
 		}
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/web/userView.jsp");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
 		rd.forward(request, response);
 	}
 

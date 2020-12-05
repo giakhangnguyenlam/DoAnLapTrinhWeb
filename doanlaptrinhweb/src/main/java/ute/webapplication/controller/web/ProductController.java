@@ -42,7 +42,10 @@ public class ProductController extends HttpServlet {
 		CartModel cart = MyUtils.getCartUser(request.getSession());
 		if (cart != null) {
 			request.setAttribute("cart", cart);
-			int totalItems = cart.getListItems().size();
+			int totalItems = 0;
+			for (int i = 0; i < cart.getListItems().size(); i++) {
+				totalItems = totalItems + cart.getListItems().get(i).getSoluong();
+			}
 			request.setAttribute("totalItems", totalItems);
 		}
 		String idProduct = request.getParameter("idProduct").trim();

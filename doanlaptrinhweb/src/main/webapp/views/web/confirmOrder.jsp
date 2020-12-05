@@ -61,7 +61,31 @@
 
 	<div class="container">
 	<div class="check">	 
-			 <h1>My Shopping Bag (${totalItems})</h1>
+             <h1>Your Order Confirmation</h1>
+             <table style="width:100%">
+                <tr>
+                    <td>Your Name:</td>
+                    <td>${user.tenKhachHang}</td>
+                </tr>
+                <tr>
+                    <td>Your Phone:</td>
+                    <td>${user.soDienThoai}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>${user.eMail}</td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td>${user.diaChi}</td>
+                </tr>
+            </table>
+            <form action="${pageContext.request.contextPath}/editUserInConfirmationController">
+             <input type="submit" value="Edit">
+             </form>
+           <br>
+           <br>
+           <br>
 		 <div class="col-md-9 cart-items">
 		 <c:forEach var="item" items="${cart.listItems}">	
 		 	<div class="cart-header">
@@ -73,23 +97,10 @@
 					   <div class="cart-item-info">
 						<h3><a href="${pageContext.request.contextPath}/productservlet?idProduct=${item.maSanPham}">Product Name: ${item.ten}</a>
 						<span>Product Code: ${item.maSanPham}</span>
-						<span>Cost: $ ${item.giaban}</span>
+                        <span>Cost: $ ${item.giaban}</span>
+                        <span>Quantity: ${item.soluong}</span>
+                        <span>Total Cost: ${item.thanhTien}</span>
 						</h3>
-						<form action="${pageContext.request.contextPath}/cart">
-						<div class="quantity-area clearfix">
-										<input type="button" value="-" class="qty-btn qtyminus" />
-										<input type="text" id="quantity" data-max="" data-name22="" name="quantity"
-											value="${item.soluong}" min="1" class="quantity-selector" />
-										<input type="button" value="+" class="qty-btn qtyplus" />
-						</div>
-							 <div class="delivery">
-							 <span> Total Cost: ${item.thanhTien}</span>
-							 <div class="clearfix"></div>
-							 <input type="hidden" name="idProduct" value="${item.maSanPham}"> 
-							 <input type="submit" name="update" value="Update">
-							 <input type="submit" name="delete" value="Delete"> 
-				        </div>	
-				        </form>
 					   </div>
 					   <div class="clearfix"></div>
 											
@@ -97,7 +108,8 @@
 			 </div>
 			 </c:forEach>
 		</div>
-		<div class="col-md-3 cart-total">
+	 </div>			 
+	<div class="col-md-3 cart-total">
 			 <a class="continue" href="${pageContext.request.contextPath}/product?idProduct=computer">Continue to basket</a>
 			 <div class="price-details">
 				 <h3>Price Details</h3>
@@ -116,12 +128,10 @@
 			 </ul>
 			 
 			 <div class="clearfix"></div>
-			 <a class="order" href="${pageContext.request.contextPath}/orderconfirmation">Place Order</a>
+			 <a class="order" href="${pageContext.request.contextPath}/confirmOrderServlet">Confirm</a>
 		</div>
 			<div class="clearfix"> </div>
-	 </div>
-	 </div>			 
-
+	 </div>	
 </head>
 <body>
 

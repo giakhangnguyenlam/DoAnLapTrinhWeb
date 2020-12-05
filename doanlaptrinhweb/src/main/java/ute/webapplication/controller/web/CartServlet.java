@@ -69,12 +69,13 @@ public class CartServlet extends HttpServlet {
 					cartDAO.deleteCart(conn, cart, idProduct);
 				}
 				
-				int totalItems = cart.getListItems().size();
-				request.setAttribute("totalItems", totalItems);
+				int totalItems = 0;
 				float totalCost=0;
-				for (int i = 0; i < totalItems; i++) {
+				for (int i = 0; i < cart.getListItems().size(); i++) {
 					totalCost = totalCost + cart.getListItems().get(i).getGiaban()*cart.getListItems().get(i).getSoluong();
+					totalItems = totalItems + cart.getListItems().get(i).getSoluong();
 				}
+				request.setAttribute("totalItems", totalItems);
 				request.setAttribute("cart", cart);
 				request.setAttribute("totalCost", totalCost);
 				url="/views/web/checkout.jsp";

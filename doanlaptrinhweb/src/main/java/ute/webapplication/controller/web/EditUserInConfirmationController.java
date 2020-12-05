@@ -14,16 +14,16 @@ import ute.webapplication.model.web.CartModel;
 import ute.webapplication.utils.web.MyUtils;
 
 /**
- * Servlet implementation class EditUserController
+ * Servlet implementation class EditUserInConfirmationController
  */
-@WebServlet("/editUser")
-public class EditUserController extends HttpServlet {
+@WebServlet("/editUserInConfirmationController")
+public class EditUserInConfirmationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditUserController() {
+    public EditUserInConfirmationController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,9 @@ public class EditUserController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountModel user = MyUtils.getLoginedUser(request.getSession());
-		request.setAttribute("user", user);
+		if (user != null) {
+			request.setAttribute("user", user);
+		}
 		CartModel cart = MyUtils.getCartUser(request.getSession());
 		if (cart != null) {
 			request.setAttribute("cart", cart);
@@ -43,7 +45,7 @@ public class EditUserController extends HttpServlet {
 			}
 			request.setAttribute("totalItems", totalItems);
 		}
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/web/userView.jsp");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/web/EditUserInConfirmation.jsp");
 		rd.forward(request, response);
 	}
 

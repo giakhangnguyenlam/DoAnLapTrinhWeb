@@ -1,6 +1,8 @@
 package ute.webapplication.DAO.web;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import ute.webapplication.model.web.CartModel;
 import ute.webapplication.model.web.ItemsModel;
@@ -73,5 +75,24 @@ public class CartDAO{
 		return (ItemsModel)cart.getListItems().get(i);
 	}
 	
+	public boolean storeCartInDB(Connection conn, Object obj)
+	{
+		CartModel cart = (CartModel)obj;
+		String sql = "Insert into donhang(ngaymua, sanpham, tongtien, trangthaidonhang, tentaikhoan) Values (?, ?, ?, ?, ?)";
+		try {
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setDate(1, cart.getNgayMuaHang());
+			pstm.setString(2, cart.getSanpham());
+			pstm.setFloat(3, cart.getTongTien());
+			pstm.setString(4, cart.getTinhTrangDonHang());
+			pstm.setString(5, cart.getUser().getTenTaiKhoan());
+			pstm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 }
