@@ -53,6 +53,9 @@
 	
 </script>
 
+</head>
+<body>
+
 
 	<!--Header -->
 	<jsp:include page="header.jsp"></jsp:include>
@@ -87,7 +90,7 @@
 							 <div class="clearfix"></div>
 							 <input type="hidden" name="idProduct" value="${item.maSanPham}"> 
 							 <input type="submit" name="update" value="Update">
-							 <input type="submit" name="delete" value="Delete"> 
+							 <input type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure you want to delete?')"> 
 				        </div>	
 				        </form>
 					   </div>
@@ -120,13 +123,7 @@
 		</div>
 			<div class="clearfix"> </div>
 	 </div>
-	 </div>			 
-
-</head>
-<body>
-
-
-
+	 </div>			
 
 </body>
 </html>

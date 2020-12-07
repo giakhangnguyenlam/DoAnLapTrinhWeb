@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import ute.webapplication.model.web.DetailLaptopModel;
 import ute.webapplication.model.web.ProductModel;
@@ -198,6 +199,70 @@ public class ProductDAO implements IObjectDAO{
 		return null;
 		
 		
+	}
+	
+	public int Count(Connection conn, String productCode)
+	{
+		String sql = "Select count(*) from sanpham Where masanpham like ?";
+		PreparedStatement pstm;
+		try {
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, productCode);
+			ResultSet rs = pstm.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
+	
+	public List<ProductModel> searchSixProducts(Connection conn, String productCode, int index, int size)
+	{
+		String sql = "select * \r\n"
+				+ "From (Select row_number() over (order by masanpham asc) as id, masanpham, ten, mota, giaban, soluong, nhacungcap, hinhanh, soluongnhap, soluongban \r\n"
+				+ "	from sanpham\r\n"
+				+ "	Where masanpham like ?) as temp\r\n"
+				+ "where id between ?*6-5 and ?*6";
+		List<ProductModel> listProduct = new ArrayList<ProductModel>();
+		try {
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, productCode);
+			pstm.setInt(2, index);
+			pstm.setInt(3, index);
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+				String masanpham = rs.getString(2);
+				String ten = rs.getString(3);
+				String mota = rs.getString(4);
+				float giaban = rs.getFloat(5);
+				int soluong = rs.getInt(6);
+				int nhacungcap = rs.getInt(7);
+				String hinhanh = rs.getString(8);
+				int soluongnhap = rs.getInt(9);
+				int soluongban = rs.getInt(10);
+				ProductModel oneProduct = new ProductModel();
+				oneProduct.setMaSanPham(masanpham);
+				oneProduct.setTen(ten);
+				oneProduct.setMota(mota);
+				oneProduct.setGiaban(giaban);
+				oneProduct.setSoLuong(soluong);
+				oneProduct.setNhaCungCap(nhacungcap);
+				oneProduct.setHinhAnh(hinhanh);
+				oneProduct.setSoLuongNhap(soluongnhap);
+				oneProduct.setSoLuongBan(soluongban);
+				listProduct.add(oneProduct);
+			}
+			return listProduct;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@Override

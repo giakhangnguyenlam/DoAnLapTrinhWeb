@@ -48,15 +48,36 @@ public class ProductController extends HttpServlet {
 			}
 			request.setAttribute("totalItems", totalItems);
 		}
+		
+		int pageSize = 6;
+		int endPage = 0;
+		
 		String idProduct = request.getParameter("idProduct").trim();
 		ProductDAO productDAO = new ProductDAO();
 		if (idProduct.equals(null)) {			
 			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request));
-			request.setAttribute("listProduct", listProduct);	
+			request.setAttribute("listProduct", listProduct);
 		}
 		else if (idProduct.equals("computer")) {
-			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LT%");
-			request.setAttribute("listProduct", listProduct);	
+			//List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LT%");
+			//request.setAttribute("listProduct", listProduct);
+			int count = productDAO.Count(MyUtils.getStoredConnection(request), "LT%");			
+			endPage = count / pageSize ;
+			if (count % pageSize != 0 ) {
+				endPage++;
+			}
+			int index;
+			if (request.getParameter("index") == null) {
+				index=1;
+			}
+			else {
+				index = Integer.parseInt(request.getParameter("index").trim());
+			}
+			request.setAttribute("end", endPage);
+			List<ProductModel> listProduct = productDAO.searchSixProducts(MyUtils.getStoredConnection(request), "LT%", index, pageSize);
+			request.setAttribute("listProduct", listProduct);
+			request.setAttribute("idProduct", idProduct);
+			request.setAttribute("index", index);
 		}
 		else if (idProduct.equals("accessories")) {
 			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "Acc%");
