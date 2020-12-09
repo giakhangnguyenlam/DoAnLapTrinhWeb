@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 import javax.naming.directory.SearchControls;
 
@@ -203,6 +202,7 @@ public class ProductDAO implements IObjectDAO{
 		
 	}
 	
+
 	public int Count(Connection conn, String productCode)
 	{
 		String sql = "Select count(*) from sanpham Where masanpham like ?";
@@ -281,6 +281,7 @@ public class ProductDAO implements IObjectDAO{
 	}
 	
 	
+
 	@Override
 	public boolean update(Connection conn, Object obj, String name) {
 		

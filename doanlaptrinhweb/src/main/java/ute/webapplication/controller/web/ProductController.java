@@ -60,7 +60,7 @@ public class ProductController extends HttpServlet {
 			index = Integer.parseInt(request.getParameter("index").trim());
 		}
 		
-		
+
 		String idProduct = request.getParameter("idProduct").trim();
 		List<ProductModel> listProduct;
 		ProductDAO productDAO = new ProductDAO();
@@ -73,6 +73,12 @@ public class ProductController extends HttpServlet {
 			//request.setAttribute("listProduct", listProduct);
 			count = productDAO.Count(MyUtils.getStoredConnection(request), "LT%");
 			listProduct = productDAO.searchSixProducts(MyUtils.getStoredConnection(request), "LT%", index, pageSize);
+			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request));
+			request.setAttribute("listProduct", listProduct);	
+		}
+		else if (idProduct.equals("computer")) {
+			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LT%");
+			request.setAttribute("listProduct", listProduct);	
 		}
 		else if (idProduct.equals("accessories")) {
 			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "Acc%");

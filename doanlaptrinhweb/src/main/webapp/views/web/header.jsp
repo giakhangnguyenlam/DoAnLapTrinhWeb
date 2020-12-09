@@ -41,7 +41,7 @@
 							<!--<li ><a href="${pageContext.request.contextPath}/views/web/userView.jsp"  ><c:out value="${user.getTenKhachHang()}"/></a></li>-->
 							<li ><a href="#"  ><c:out value="Hello, ${user.getTenKhachHang()}"/></a></li>
 							<li ><a href="${pageContext.request.contextPath}/editUser">My Account</a></li>
-							<li ><a href="${pageContext.request.contextPath}/myOrder">My Order</a></li>
+							<li ><a href="${pageContext.request.contextPath}/editUser">My Order</a></li>
 							<li><a href="${pageContext.request.contextPath}/logOut">Log out</a></li>
 							
 					<%  }%>

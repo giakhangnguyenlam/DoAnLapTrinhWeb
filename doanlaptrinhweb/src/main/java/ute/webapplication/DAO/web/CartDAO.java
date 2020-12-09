@@ -2,10 +2,7 @@ package ute.webapplication.DAO.web;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import ute.webapplication.model.web.CartModel;
 import ute.webapplication.model.web.ItemsModel;
@@ -97,33 +94,5 @@ public class CartDAO{
 		}
 		return false;
 	}
-	
-	public List<CartModel> getAllListOrder(Connection conn, String userName)
-	{
-		String url = "Select * from donhang Where tentaikhoan = ? ";
-		try {
-			PreparedStatement pstm = conn.prepareStatement(url);
-			pstm.setString(1, userName);
-			ResultSet rs = pstm.executeQuery();
-			List<CartModel> listOrder = new ArrayList<CartModel>();
-			while (rs.next()) {
-				CartModel tempOrder = new CartModel();
-				tempOrder.setId(rs.getInt(1));
-				tempOrder.setNgayMuaHang(rs.getDate(2));
-				tempOrder.setSanpham(rs.getString(3));
-				tempOrder.setTongTien(rs.getFloat(4));
-				tempOrder.setTinhTrangDonHang(rs.getString(5));
-				listOrder.add(tempOrder);
-			}
-			return listOrder;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-		
-				
-	}
-	
 	
 }
