@@ -1040,17 +1040,15 @@ a.item_add p.number i{
   margin: 0 5px 0 0;
 }
 p.tun{
-  font-size:1em;
-  color: black;
-  text-align: left;
+	font-size:1em;
+	  color: #949494;
+  text-align: center;
   line-height: 1.3em;
   padding: 1em 0;
 }
 
 .product-at{
 	position: relative;
-	text-align: left;
-	color: black;
 }
 .product-at:hover .pro-grid{
 	display:block;
@@ -2254,7 +2252,9 @@ ul.callbacks_tabs.callbacks1_tabs {
 .bottom-cd {
   padding: 0 3px;
 }
-
+p.tun {
+  font-size: 0.8em;
+}
 a.item_add p.number {
   font-size: 0.8em;
   padding: 0.5em 0.5em;

@@ -51,65 +51,78 @@ public class ProductController extends HttpServlet {
 		
 		int pageSize = 6;
 		int endPage = 0;
+		int count = 0;
+		int index;
+		if (request.getParameter("index") == null) {
+			index=1;
+		}
+		else {
+			index = Integer.parseInt(request.getParameter("index").trim());
+		}
+		
 		
 		String idProduct = request.getParameter("idProduct").trim();
+		List<ProductModel> listProduct;
 		ProductDAO productDAO = new ProductDAO();
 		if (idProduct.equals(null)) {			
-			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request));
+			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request));
 			request.setAttribute("listProduct", listProduct);
 		}
 		else if (idProduct.equals("computer")) {
 			//List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LT%");
 			//request.setAttribute("listProduct", listProduct);
-			int count = productDAO.Count(MyUtils.getStoredConnection(request), "LT%");			
-			endPage = count / pageSize ;
-			if (count % pageSize != 0 ) {
-				endPage++;
-			}
-			int index;
-			if (request.getParameter("index") == null) {
-				index=1;
-			}
-			else {
-				index = Integer.parseInt(request.getParameter("index").trim());
-			}
-			request.setAttribute("end", endPage);
-			List<ProductModel> listProduct = productDAO.searchSixProducts(MyUtils.getStoredConnection(request), "LT%", index, pageSize);
-			request.setAttribute("listProduct", listProduct);
-			request.setAttribute("idProduct", idProduct);
-			request.setAttribute("index", index);
+			count = productDAO.Count(MyUtils.getStoredConnection(request), "LT%");
+			listProduct = productDAO.searchSixProducts(MyUtils.getStoredConnection(request), "LT%", index, pageSize);
 		}
 		else if (idProduct.equals("accessories")) {
-			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "Acc%");
+			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "Acc%");
 			request.setAttribute("listProduct", listProduct);
 		}
 		else if (idProduct.equals("LTApple")){
-			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LTApple%");
+			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LTApple%");
 			request.setAttribute("listProduct", listProduct);
 		}
 		else if (idProduct.equals("LTAcer")){
-			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LTAcer%");
+			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LTAcer%");
 			request.setAttribute("listProduct", listProduct);
 		}
 		else if (idProduct.equals("LTAssus")) {
-			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LTAssus%");
+			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "LTAssus%");
 			request.setAttribute("listProduct", listProduct);
 		}
 		else if (idProduct.equals("ram")){
-			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "AccRam%");
+			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "AccRam%");
 			request.setAttribute("listProduct", listProduct);
 		}
 		else if(idProduct.equals("cpu")){
-			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "AccCPU%");
+			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "AccCPU%");
 			request.setAttribute("listProduct", listProduct);
 		}
 		else if(idProduct.equals("harddrive")){
-			List<ProductModel> listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "AccHD%");
+			listProduct = productDAO.AllListProduct(MyUtils.getStoredConnection(request), "AccHD%");
 			request.setAttribute("listProduct", listProduct);
 		}
 		else {
-			System.out.println("comming soon");
+			listProduct = null;
 		}
+		
+		String searchName = request.getParameter("search");
+		if (searchName!=null) {
+			
+		}
+		
+		
+		
+		endPage = count / pageSize ;
+		if (count % pageSize != 0 ) {
+			endPage++;
+		}
+
+		request.setAttribute("idProduct", idProduct);
+		request.setAttribute("index", index);
+		request.setAttribute("listProduct", listProduct);
+		request.setAttribute("end", endPage);
+		
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/web/products.jsp");
 		rd.forward(request, response);	
 

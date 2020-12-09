@@ -3,6 +3,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#search').autocomplete({
+			source: '${pageContext.request.contextPath}/search'
+		});
+	});
+</script>
 <%
 	AccountModel user = (AccountModel)MyUtils.getLoginedUser(request.getSession());
 %>	
@@ -11,8 +22,8 @@
 	<div class="header-top">
 		<div class="container">
 			<div class="search">
-					<form>
-						<input type="text" value="Search " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+					<form action="${pageContext.request.contextPath}/product">
+						<input type="text" id="search" name="search">
 						<input type="submit" value="Go">
 					</form>
 			</div>
@@ -65,10 +76,7 @@
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="${pageContext.request.contextPath}/product?idProduct=LTApple">Apple</a></li>
-
-										
-										
+										<li><a href="${pageContext.request.contextPath}/product?idProduct=LTApple">Apple</a></li>	
 									</ul>	
 								</div>							
 							</div>

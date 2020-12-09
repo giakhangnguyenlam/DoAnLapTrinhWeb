@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import javax.naming.directory.SearchControls;
+
 import ute.webapplication.model.web.DetailLaptopModel;
 import ute.webapplication.model.web.ProductModel;
 
@@ -264,6 +266,20 @@ public class ProductDAO implements IObjectDAO{
 		}
 		return null;
 	}
+	
+	
+	public List<String> search(Connection conn, String keyword)
+	{
+		List<String> names = new ArrayList<String>();
+		List<ProductModel> allProduct = AllListProduct(conn);
+		for (ProductModel product : allProduct) {
+			if (product.getTen().toLowerCase().contains(keyword.toLowerCase())) {
+				names.add(product.getTen());
+			}
+		}
+		return names;
+	}
+	
 	
 	@Override
 	public boolean update(Connection conn, Object obj, String name) {
