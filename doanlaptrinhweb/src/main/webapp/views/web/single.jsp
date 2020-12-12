@@ -53,6 +53,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/template/web/css/flexslider.css" type="text/css" media="screen" />
+<script defer src="${pageContext.request.contextPath}/template/web/js/jquery.flexslider.js"></script> --%>
 </head>
 <body>
 
@@ -67,34 +69,40 @@
 	
 	<div class="col-md-9 product-price1">
 				<div class="col-md-5 single-top">	
-			<div class="flexslider">
-  <ul class="slides">
-    <li data-thumb="images/s1.png">
-      <img src="images/s1.png" />
-    </li>
-    <li data-thumb="images/s1.png">
-      <img src="images/s1.png" />
-    </li>
-    <li data-thumb="images/si2.jpg">
-      <img src="images/si2.jpg" />
-    </li>
-    <li data-thumb="images/si.jpg">
-      <img src="images/si.jpg" />
-    </li>
-  </ul>
-</div>
+
+
+<section class="slider">
+        <!-- <div class="flexslider">
+          <ul class="slides">
+            <li>
+  	    	    <img src=images/2.jpg />
+  	    		</li>
+  	    		<li>
+  	    	    <img src="images/2.jpg" />
+  	    		</li>
+  	    		<li>
+  	    	    <img src="images/2.jpg" />
+  	    		</li>
+  	    		<li>
+  	    	    <img src="images/2.jpg" />
+  	    		</li>
+          </ul>
+        </div> -->
+        
+        <img alt="abc" src="${product.hinhAnh}">
+</section>
 <!-- FlexSlider -->
-  <script defer src="js/jquery.flexslider.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/web/css/flexslider.css" type="text/css" media="screen" />
-<script>
-// Can also be used with $(document).ready()
-$(window).load(function() {
-  $('.flexslider').flexslider({
-    animation: "slide",
-    controlNav: "thumbnails"
-  });
-});
-</script>
+  
+          <script>
+            // Can also be used with $(document).ready()
+            $(window).load(function() {
+              $('.flexslider').flexslider({
+                animation: "slide"
+              });
+            });
+            </script>
+
+
 
 					</div>	
 					<div class="col-md-7 single-top-in simpleCart_shelfItem">

@@ -4,8 +4,9 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -14,6 +15,8 @@
 		});
 	});
 </script>
+
+
 <%
 	AccountModel user = (AccountModel)MyUtils.getLoginedUser(request.getSession());
 %>	
@@ -22,8 +25,8 @@
 	<div class="header-top">
 		<div class="container">
 			<div class="search">
-					<form action="${pageContext.request.contextPath}/product">
-						<input type="text" id="search" name="search">
+					<form action="${pageContext.request.contextPath}/product?idProduct=null" method=post>
+						<input type="text" name="search" id="search" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
 						<input type="submit" value="Go">
 					</form>
 			</div>
@@ -41,7 +44,7 @@
 							<!--<li ><a href="${pageContext.request.contextPath}/views/web/userView.jsp"  ><c:out value="${user.getTenKhachHang()}"/></a></li>-->
 							<li ><a href="#"  ><c:out value="Hello, ${user.getTenKhachHang()}"/></a></li>
 							<li ><a href="${pageContext.request.contextPath}/editUser">My Account</a></li>
-							<li ><a href="${pageContext.request.contextPath}/editUser">My Order</a></li>
+							<li ><a href="${pageContext.request.contextPath}/myOrder">My Order</a></li>
 							<li><a href="${pageContext.request.contextPath}/logOut">Log out</a></li>
 							
 					<%  }%>
@@ -76,7 +79,10 @@
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
-										<li><a href="${pageContext.request.contextPath}/product?idProduct=LTApple">Apple</a></li>	
+										<li><a href="${pageContext.request.contextPath}/product?idProduct=LTApple">Apple</a></li>
+
+										
+										
 									</ul>	
 								</div>							
 							</div>

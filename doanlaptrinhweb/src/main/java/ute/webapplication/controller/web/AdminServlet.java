@@ -2,6 +2,7 @@ package ute.webapplication.controller.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ute.webapplication.DAO.web.CartDAO;
+import ute.webapplication.DAO.web.ProductDAO;
 import ute.webapplication.DAO.web.UserDAO;
 import ute.webapplication.model.web.AccountModel;
+import ute.webapplication.model.web.CartModel;
+import ute.webapplication.model.web.ProductModel;
 import ute.webapplication.utils.web.MyUtils;
-
+import ute.webapplication.model.web.ProductModelWithHibernate;
 /**
  * Servlet implementation class AdminServlet
  */
@@ -54,10 +59,21 @@ public class AdminServlet extends HttpServlet {
 			}
 			else if(actionAdmin.equals("ViewProduct"))
 			{
+				//List<ProductModel> listProduct=ProductDAO.AllListProduct(MyUtils.getStoredConnection(request));
+				List<ProductModelWithHibernate> listProduct=ProductDAO.getAllProduct();
+				request.setAttribute("listProduct", listProduct);
+				url="/views/admin/SanPhamView.jsp";
 			}
 			else if(actionAdmin.equals("ViewSupplier"))
 			{
+				url="/views/admin/NhaCungCapView.jsp";
+			}
+			else if(actionAdmin.equals("ViewOrder"))
+			{
 				
+//				ArrayList<CartModel> listOrder=OrderDAO.AllListOrder(MyUtils.getStoredConnection(request));
+//				request.setAttribute("listOrder", listOrder);
+//				url="/views/admin/DonHangView.jsp";
 			}
 		}
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);

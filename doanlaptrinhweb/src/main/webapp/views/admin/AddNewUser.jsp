@@ -126,7 +126,7 @@ if (daySelected == null) {
 
 
 	<!--Header -->
-	<jsp:include page="home.jsp"></jsp:include>
+	<jsp:include page="TableLeft.jsp"></jsp:include>
 	<!--Header  -->
 
 

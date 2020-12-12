@@ -11,11 +11,21 @@ public class CartModel {
 	private float tongTien;
 	private String sanpham;
 	private String tinhTrangDonHang;
-	
+	private int id;
 	public CartModel()
 	{}
 	
 	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	public String getSanpham() {
 		return sanpham;
 	}

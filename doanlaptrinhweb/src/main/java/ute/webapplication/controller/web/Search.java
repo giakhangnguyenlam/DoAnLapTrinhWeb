@@ -36,7 +36,7 @@ public class Search extends HttpServlet {
 		Gson gson = new Gson();
 		String term = request.getParameter("term");
 		ProductDAO productDAO = new ProductDAO();
-		PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter(); 
 		out.print(gson.toJson(productDAO.search(MyUtils.getStoredConnection(request),term)));
 		out.flush();
 		out.close();

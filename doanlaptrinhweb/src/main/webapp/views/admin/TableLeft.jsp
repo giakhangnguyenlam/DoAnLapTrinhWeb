@@ -1,15 +1,10 @@
+   <%@page import="ute.webapplication.utils.web.MyUtils"%>
+<%@page import="ute.webapplication.model.web.AccountModel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/template/admin/css/main.css">
-</head>
-<body>
-    <div class="wrapper">
+	pageEncoding="UTF-8"%>
+<%@include file="/common/taglib.jsp"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/template/admin/css/main.css">
+ <div class="wrapper">
         <div class="container">
             <div class="dashboard">
                 <div class="left">
@@ -67,7 +62,7 @@
                                 <a href="${pageContext.request.contextPath}/AdminServlet?actionAdmin=ViewUser" class="left__title"><img src="assets/icon-users.svg" alt="">Khách Hàng</a>
                             </li>
                             <li class="left__menuItem">
-                                <a href="view_orders.html" class="left__title"><img src="assets/icon-book.svg" alt="">Đơn Đặt Hàng</a>
+                                <a href="${pageContext.request.contextPath}/AdminServlet?actionAdmin=ViewOrder" class="left__title"><img src="assets/icon-book.svg" alt="">Đơn Đặt Hàng</a>
                             </li>
                             <li class="left__menuItem">
                                 <a href="${pageContext.request.contextPath}/AdminServlet?actionAdmin=ViewProduct" class="left__title"><img src="${pageContext.request.contextPath}/images/assets/icon-pencil.svg" alt="">CSS</a>
@@ -85,51 +80,4 @@
                         </ul>
                     </div>
                 </div>
-                <div class="right">
-                    <div class="right__content">
-                        <div class="right__title">Bảng điều khiển</div>
-                        <p class="right__desc">Bảng điều khiển</p>
-                        <div class="right__cards">
-                        <form name="" action="${pageContext.request.contextPath}/AdminServlet">
-
-							
-                                <div class="right__cardTitle">User</div>.0
-                                <div class="right__cardNumber">72</div>
-                                <input type="submit" name="actionAdmin" value="ViewUser">
-                                <input type="submit" name="actionAdmin" value="ViewProduct">
-                                <input type="submit" name="actionAdmin" value="ViewSupplier">
-                                <input type="submit" name="actionAdmin" value="ViewOrder">
-                                <div class="right__cardDesc">Xem Chi Tiết <img src="assets/arrow-right.svg" alt=""></div>
-                            <a class="right__card" href="view_customers.html">
-                                <div class="right__cardTitle">Khách Hàng</div>
-                                <div class="right__cardNumber">12</div>
-                                <div class="right__cardDesc">Xem Chi Tiết <img src="assets/arrow-right.svg" alt=""></div>
-                            </a>
-                            <a class="right__card" href="view_p_category.html">
-                                <div class="right__cardTitle">Danh Mục</div>
-                                <div class="right__cardNumber">4</div>
-                                <div class="right__cardDesc">Xem Chi Tiết <img src="assets/arrow-right.svg" alt=""></div>
-                            </a>
-                            <a class="right__card" href="view_orders.html">
-                                <div class="right__cardTitle">Đơn Hàng</div>
-                                <div class="right__cardNumber">72</div>
-                                <div class="right__cardDesc">Xem Chi Tiết <img src="assets/arrow-right.svg" alt=""></div>
-                            </a>
-                        </div>
-                        </form>
-                        <div class="right__table">
-                            <p class="right__tableTitle">Đơn hàng mới</p>
-                            <div class="right__tableWrapper">
-                                
-                            </div>
-                            <a href="" class="right__tableMore"><p>Xem tất cả các đơn đặt hàng</p> <img src="assets/arrow-right-black.svg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="${pageContext.request.contextPath}/template/admin/js/main.js"></script>
-</body>
-</html>
+                    <script src="${pageContext.request.contextPath}/template/admin/js/main.js"></script>
